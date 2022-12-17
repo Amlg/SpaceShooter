@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
     private float _speed = 3.5f;
-    //test commit change
+    
+
     void Start()
     {
         //take the current position = new position (0, 0, 0)
@@ -16,8 +18,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //new Vector3(1, 0, 0); < same thing as Vector3.right
-        transform.Translate(Vector3.right * _speed * Time.deltaTime);
-        
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+     
+        //movement implementation #1
+        //transform.Translate(Vector3.right * horizontalInput * _speed * Time.deltaTime);
+        //transform.Translate(Vector3.up * verticalInput * _speed * Time.deltaTime);
+
+        //movement implementation #2
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+        transform.Translate(direction * _speed * Time.deltaTime);
+
     }
 }
