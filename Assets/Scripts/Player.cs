@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
     private float _canFire = -1f;
     [SerializeField]
     private int _lives = 3;
-    // Variable for isTripleShotActive
     [SerializeField]
     private bool _isTripleShotActive = false;
 
@@ -24,7 +23,6 @@ public class Player : MonoBehaviour
     
     void Start()
     {
-        //reset initial position
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         
@@ -47,15 +45,10 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        //movement implementation
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
         transform.Translate(direction * _speed * Time.deltaTime);
-
-        //vertical player movement restriction, cant go above the middle on top and outside of the screen on the bottom
-        //Clamp implementation
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
-        //horizontal player movement adjustment, when ouside of the screen (left or right) loops to the other side of the screen
         if (transform.position.x > 11)
         {
             transform.position = new Vector3(-11, transform.position.y, 0);
@@ -88,5 +81,15 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+    }
+    public void TrippleShotActive()
+    {
+        _isTripleShotActive = true;
+        StartCoroutine(TrippleShotPowerDownRoutine());
+    }
+    IEnumerator TrippleShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isTripleShotActive = false;
     }
 }

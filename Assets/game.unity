@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 711308301}
   m_Layer: 0
-  m_Name: Empty Container
+  m_Name: EnemyContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnTimer: 1
   _enemyPrefab: {fileID: 1897624319490494647, guid: 46b2ac1a5356d934b8a171d95912e40c, type: 3}
+  _tripleShotPowerupPrefab: {fileID: 3773754683568699450, guid: 3693d1a8038df1d49bbb31b863a7de8d, type: 3}
   _enemyContainer: {fileID: 711308300}
 --- !u!4 &1661220248
 Transform:
